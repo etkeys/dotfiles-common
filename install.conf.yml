@@ -1,0 +1,21 @@
+- defaults:
+    clean:
+        force: true
+    link:
+        create: true
+        force: true
+        relink: true 
+    shell:
+        stderr: true
+        stdout: true
+
+
+- clean: ['~/']
+
+
+- link:
+    ~/:
+        path: home/.*
+        glob: true
+
+
