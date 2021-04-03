@@ -28,6 +28,7 @@
         glob: true
     ~/.vim: ~
 
+
 - sudo:
     - link:
         # Link root config files to mine
@@ -36,6 +37,7 @@
             glob: true
         ~/.vim:
             path: vim
+
 
     - shell:
         - description: Update grub
@@ -48,4 +50,16 @@
                   s/^GRUB_CMDLINE_LINUX_DEFAULT.+/GRUB_CMDLINE_LINUX_DEFAULT=\"text\"/
               " /etc/default/grub && 
               update-grub
+
+
+        - description: Disable CUPS
+          command: >
+              systemctl is-enabled cups &&
+              (
+                  systemctl disable --now cups &&
+                  echo "cups disabled" &&
+                  systemctl disable --now cups-browsed &&
+                  echo "cups-browsed disabled"
+              ) ||
+              echo "cups not enabled... skipping."
 
