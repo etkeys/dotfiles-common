@@ -81,3 +81,35 @@
               visudo -c -f ${SOURCE} &&
               VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
 
+
+        - description: swap caps and escape key
+          command: |
+              NAME=swap-caps-esc &&
+              KMAPFILE=${NAME}.kmap &&
+              KMAPPATH=/usr/local/share &&
+              SERVICEFILE=${NAME}.service &&
+              SERVICEPATH=/usr/local/lib/systemd/system &&
+              ( systemctl is-enabled ${SERVICEFILE} ||
+              (
+              mkdir -p {${KMAPPATH},${SERVICEPATH}} &&
+              { cat <<- EOF > ${KMAPPATH}/${KMAPFILE}
+              keymaps 0-127
+              keycode  1 = CtrlL_Lock
+              keycode 58 = Escape
+              EOF
+              } &&
+              { cat <<- EOF > ${SERVICEPATH}/${SERVICEFILE}
+              [Unit]
+              Description=Apply key remapping to swap CapsLock and Escape keys
+              After=console-setup.service
+              [Service]
+              Type=oneshot
+              RemainAfterExit=no
+              ExecStart=/usr/bin/loadkeys ${KMAPPATH}/${KMAPFILE}
+              [Install]
+              WantedBy=multi-user.target 
+              EOF
+              } &&
+              systemctl enable --now ${SERVICEPATH}/${SERVICEFILE} 
+              ))
+
