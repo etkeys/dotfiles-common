@@ -63,3 +63,13 @@
               ) ||
               echo "cups not enabled... skipping."
 
+
+        - description: Disable SSSD
+          command: >
+              systemctl is-enabled sssd &&
+              (
+                  systemctl disable --now sssd &&
+                  echo "sssd disabled"
+              ) ||
+              echo "sssd not enabled ... skipping."
+
