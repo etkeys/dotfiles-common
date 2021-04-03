@@ -12,10 +12,19 @@
 
 - clean: ['~/']
 
+- shell:
+    - description: download vim pathogen
+      command: >
+          DOTVIMAUTODIR="${PWD}/vim/autoload/";
+          SHASUMFILE="${PWD}/sha256.sums";
+          cd /tmp &&
+          curl -LSo "pathogen.vim" "https://tpo.pe/pathogen.vim" &&
+          sha256sum --check --ignore-missing "$SHASUMFILE" && 
+          mv "pathogen.vim" "$DOTVIMAUTODIR"
 
 - link:
     ~/:
         path: home/.*
         glob: true
-
+    ~/.vim: ~
 

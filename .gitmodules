@@ -2,3 +2,39 @@
 	path = sublib/dotbot
 	url = https://github.com/anishathalye/dotbot.git
     ignore = dirty
+[submodule "vim-ctrlp"]
+	path = sublib/vim-plugins/ctrlp
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
+    ignore = dirty
+[submodule "vim-nerdtree"]
+	path = sublib/vim-plugins/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+    ignore = dirty
+[submodule "vim-syntastic"]
+	path = sublib/vim-plugins/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
+    ignore = dirty
+[submodule "vim-airline"]
+	path = sublib/vim-plugins/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+    ignore = dirty
+[submodule "vim-commentary"]
+	path = sublib/vim-plugins/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+    ignore = dirty
+[submodule "vim-ragtag"]
+	path = sublib/vim-plugins/vim-ragtag
+	url = https://github.com/tpope/vim-ragtag.git
+    ignore = dirty
+[submodule "vim-repeat"]
+	path = sublib/vim-plugins/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
+    ignore = dirty
+[submodule "vim-surround"]
+	path = sublib/vim-plugins/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+    ignore = dirty
+[submodule "vim-unimpaired"]
+	path = sublib/vim-plugins/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+    ignore = dirty
