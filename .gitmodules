@@ -38,3 +38,6 @@
 	path = sublib/vim-plugins/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
     ignore = dirty
+[submodule "dotbot-sudo"]
+	path = sublib/dotbot-plugins/sudo
+	url = https://github.com/DrDynamic/dotbot-sudo.git
