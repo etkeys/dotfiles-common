@@ -28,3 +28,12 @@
         glob: true
     ~/.vim: ~
 
+- sudo:
+    - link:
+        # Link root config files to mine
+        ~/:
+            path: home/.*
+            glob: true
+        ~/.vim:
+            path: vim
+
