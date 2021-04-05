@@ -44,3 +44,6 @@
 [submodule "scripts"]
 	path = sublib/scripts
 	url = https://github.com/etkeys/scripts.git
+[submodule "vim-pathogen"]
+	path = sublib/vim-plugins/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen.git
