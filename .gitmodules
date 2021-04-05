@@ -41,3 +41,6 @@
 [submodule "dotbot-sudo"]
 	path = sublib/dotbot-plugins/sudo
 	url = https://github.com/DrDynamic/dotbot-sudo.git
+[submodule "scripts"]
+	path = sublib/scripts
+	url = https://github.com/etkeys/scripts.git
