@@ -10,35 +10,7 @@
         stdout: true
 
 
-- clean: ['~/']
-
-- shell:
-    - description: download vim pathogen
-      command: >
-          DOTVIMAUTODIR="${PWD}/vim/autoload/";
-          SHASUMFILE="${PWD}/sha256.sums";
-          cd /tmp &&
-          curl -LSo "pathogen.vim" "https://tpo.pe/pathogen.vim" &&
-          sha256sum --check --ignore-missing "$SHASUMFILE" && 
-          mv "pathogen.vim" "$DOTVIMAUTODIR"
-
-- link:
-    ~/:
-        path: home/.*
-        glob: true
-    ~/.vim: ~
-
-
 - sudo:
-    - link:
-        # Link root config files to mine
-        ~/:
-            path: home/.*
-            glob: true
-        ~/.vim:
-            path: vim
-
-
     - shell:
         - description: Install packages
           command: >
@@ -119,3 +91,33 @@
               systemctl enable --now ${SERVICEPATH}/${SERVICEFILE} 
               ))
 
+
+- clean: ['~/']
+
+
+- shell:
+    - description: download vim pathogen
+      command: >
+          DOTVIMAUTODIR="${PWD}/vim/autoload/";
+          SHASUMFILE="${PWD}/sha256.sums";
+          cd /tmp &&
+          curl -LSo "pathogen.vim" "https://tpo.pe/pathogen.vim" &&
+          sha256sum --check --ignore-missing "$SHASUMFILE" && 
+          mv "pathogen.vim" "$DOTVIMAUTODIR"
+
+
+- link:
+    ~/:
+        path: home/.*
+        glob: true
+    ~/.vim: ~
+
+
+- sudo:
+    - link:
+        # Link root config files to mine
+        ~/:
+            path: home/.*
+            glob: true
+        ~/.vim:
+            path: vim
