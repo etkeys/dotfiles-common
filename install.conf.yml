@@ -40,6 +40,12 @@
 
 
     - shell:
+        - description: Install packages
+          command: >
+              apt-get update &&
+              sublib/scripts/install-packages.py --tags "any"
+
+
         - description: Update grub
           command: >
               DATESTAMP=$(date +%y%m%d%H%M);
