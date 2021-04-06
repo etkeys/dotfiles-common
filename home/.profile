@@ -20,6 +20,7 @@ fi
 if [ $USER_PRIMARY_HOST_FLAG ] ; then
 
     export JAVA_HOME="/usr/lib/jvm/default-java"
+    export QEMU_JET='qemu+ssh://erik@jet/system?keyfile=.ssh/keys_AgFoxte'
     export TERMINAL="urxvt"
     export VMDIR="/mnt/vmdrive/erik"
    
