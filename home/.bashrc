@@ -11,6 +11,15 @@ esac
 # vi mode!! <Esc>:
 set -o vi
 
+# Alias definitions.
+# Some later things depend on aliases being in place
+if [ -f "$HOME/.bash_aliases" ] ; then
+    . ~/.bash_aliases
+fi
+if [ -f "$HOME/.bash_aliases.local" ] ; then
+    . ~/.bash_aliases.local
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -51,6 +60,17 @@ parse_git_branch() {
     fi
 }
 
+dir_stack_indicator(){
+    lineend="$1"
+
+    dirCount=$(dirs | wc -l)
+    if [ $dirCount != "1" ] ; then
+        lineend="ds:$((dirCount - 1))$lineend"
+    fi
+
+    echo "$lineend"
+}
+
 # get current status of git repo
 parse_git_dirty() {
     status=`git status 2>&1 | tee`
@@ -61,23 +81,23 @@ parse_git_dirty() {
     renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
     deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
     bits=''
+    if [ "${ahead}" == "0" ]; then
+        bits="${bits}*"
+    fi
     if [ "${newfile}" == "0" ]; then
         bits="${bits}A"
     fi
-    if [ "${dirty}" == "0" ]; then
-        bits="${bits}M"
-    fi
     if [ "${deleted}" == "0" ]; then
         bits="${bits}D"
+    fi
+    if [ "${dirty}" == "0" ]; then
+        bits="${bits}M"
     fi
     if [ "${renamed}" == "0" ]; then
         bits="${bits}R"
     fi
     if [ "${untracked}" == "0" ]; then
         bits="${bits}U"
-    fi
-    if [ "${ahead}" == "0" ]; then
-        bits="${bits}*"
     fi
     if [ ! "${bits}" == "" ]; then
         echo "${bits} "
@@ -92,14 +112,14 @@ build_ps1() {
     if [ "$EUID" -eq 0 ] ; then
         username="ROOT"
     fi
-    if [ ! "$HOSTNAME" = "RogFox551" ] ; then
+    if [ "$USER_PRIMARY_HOST_FLAG" != "0" ] ; then
         host='@\h'
     fi
     if [ -n "$username" ] || [ -n "$host" ] ; then
         context="[$username$host]"
 
         if [ "$username" = "ROOT" ] ; then
-            context="\[$(tput setab 1)\]$context\[$(tput sgr0)\]  "
+            context="\[$(tput setab 1)\]$context\[$(tput sgr0)\] "
         else
             context="\[$(tput bold)\]\[$(tput setaf 2)\]$context\[$(tput sgr0)\] "
         fi 
@@ -107,16 +127,20 @@ build_ps1() {
     
     if [ "$username" = "ROOT" ] ; then
         cwd="\[$(tput setaf 3)\]\w\[$(tput sgr0)\] "
-        lineend='\n# '
+        userInd='#'
     else
         cwd="\[$(tput bold)\]\[$(tput setaf 4)\]\w\[$(tput sgr0)\] "
-        lineend='\n$ '
+        userInd='$'
     fi
-    
+
+    line2='`dir_stack_indicator`'"$userInd"
     gitinfo="\[$(tput bold)\]\[$(tput setaf 6)\]"'`parse_git_branch`'"\[$(tput sgr0)\] "
 
-    echo "$dchroot$context$cwd$gitinfo$lineend"
+    printf "$dchroot$context$cwd$gitinfo\n$line2 "
 }
+if [ "$TERM" = "linux" ] ; then
+    echo -en "\e]PC5656C9" # blue
+fi
 PS1=$(build_ps1)
 
 # If this is an xterm set the title to user@host:dir
@@ -131,12 +155,6 @@ esac
 # enable color support of ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-
-# Alias definitions.
-. ~/.bash_aliases
-if [ -f "$HOME/.bash_aliases_asi" ]; then
-    . "$HOME/.bash_aliases_asi"
 fi
 
 # enable programmable completion features (you don't need to enable
