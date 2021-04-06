@@ -82,6 +82,14 @@
               update-grub
 
 
+        - description: Update sudoers
+          command: >
+              SOURCE=etc/sudoers-override;
+              TARGET=/etc/sudoers.d/01-my-overrides;
+              visudo -c -f ${SOURCE} &&
+              VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
+
+
 - clean: ['~/']
 
 
