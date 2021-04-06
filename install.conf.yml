@@ -100,6 +100,8 @@
         path: home/.*
         glob: true
     ~/.vim: ~
+    ~/Downloads: /tmp
+    ~/tmp: /tmp
 
 
 - sudo:
@@ -110,3 +112,5 @@
             glob: true
         ~/.vim:
             path: vim
+        ~/tmp: /tmp
+
