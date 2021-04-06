@@ -16,18 +16,6 @@
               sublib/scripts/install-packages.py --tags "any"
 
 
-        - description: Update grub
-          command: >
-              DATESTAMP=$(date +%y%m%d%H%M);
-              cp /etc/default/grub /etc/default/grub.$DATESTAMP.bak &&
-              sed -i -E "
-                  s/^GRUB_TIMEOUT_STYLE=.+/GRUB_TIMEOUT_STYLE=menu/;
-                  s/^GRUB_TIMEOUT=.+/GRUB_TIMEOUT=5/;
-                  s/^GRUB_CMDLINE_LINUX_DEFAULT.+/GRUB_CMDLINE_LINUX_DEFAULT=\"text\"/
-              " /etc/default/grub && 
-              update-grub
-
-
         - description: Disable CUPS
           command: >
               systemctl is-enabled cups &&
@@ -48,14 +36,6 @@
                   echo "sssd disabled"
               ) ||
               echo "sssd not enabled ... skipping."
-
-
-        - description: Update sudoers
-          command: >
-              SOURCE=etc/sudoers-override;
-              TARGET=/etc/sudoers.d/01-my-overrides;
-              visudo -c -f ${SOURCE} &&
-              VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
 
 
         - description: swap caps and escape key
