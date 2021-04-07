@@ -9,6 +9,14 @@
 
 
 - sudo:
+    - link:
+        /usr/local/bin/pip:
+            path: /usr/bin/pip3
+            force: false
+            ignore-missing: true
+            if: command -v python3
+
+
     - shell:
         - description: Install packages
           command: >
