@@ -90,24 +90,47 @@
               VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
 
 
-- clean: ['~/']
+- create: ['~/bin']
+
+
+- clean: ['~/', '~/bin']
 
 
 - link:
     ~/:
         path: home/.*
         glob: true
+    ~/bin/:
+        path: sublib/scripts/*
+        glob: true
+        exclude:
+            - sublib/scripts/LICENSE
+            - sublib/scripts/npdisksetup
+            - sublib/scripts/save-the-change
     ~/.vim: ~
     ~/Downloads: /tmp
     ~/tmp: /tmp
 
 
 - sudo:
+    - create: ['~/bin']
+
+
+    - clean: ['~/', '~/bin']
+
+
     - link:
         # Link root config files to mine
         ~/:
             path: home/.*
             glob: true
+        ~/bin/:
+            path: sublib/scripts/*
+            glob: true
+            exclude:
+                - sublib/scripts/LICENSE
+                - sublib/scripts/npdisksetup
+                - sublib/scripts/save-the-change
         ~/.vim:
             path: vim
         ~/tmp: /tmp
