@@ -138,13 +138,13 @@ build_ps1() {
 
     printf "$dchroot$context$cwd$gitinfo\n$line2 "
 }
-if [ "$TERM" = "linux" ] ; then
-    echo -en "\e]PC5656C9" # blue
-fi
 PS1=$(build_ps1)
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
+linux)
+    echo -en "\e]PC5656C9" # a more visible blue
+    ;;
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
@@ -168,32 +168,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# start the ssh-agent
-start_agent() {
-    echo "Initializing new SSH agent..."
-    # spawn ssh-agent
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add
-}
-
-if [ $USER_PRIMARY_HOST_FLAG ] ; then
-    if [ -n "$DESKTOP_SESSION" ] ; then
-        terminal-init-info.sh
-    fi
-
-    if [ -f "${SSH_ENV}" ]; then
-         . "${SSH_ENV}" > /dev/null
-         ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-            start_agent;
-        }
-    else
-        start_agent;
-    fi
-    ssh-add $HOME/.ssh/keys_AgFoxte
-fi
 
 # some ease of use functions
 giti(){
@@ -214,6 +188,6 @@ pushd(){
     command pushd "$@" > /dev/null
 }
 
+# If there is a local bashrc, load it now
+[ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
-# added by travis gem
-[ -f /home/erik/.travis/travis.sh ] && source /home/erik/.travis/travis.sh
