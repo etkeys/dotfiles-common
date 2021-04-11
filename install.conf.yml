@@ -108,13 +108,8 @@
     ~/:
         path: home/.*
         glob: true
-    ~/bin/:
-        path: sublib/scripts/*
-        glob: true
-        exclude:
-            - sublib/scripts/LICENSE
-            - sublib/scripts/npdisksetup
-            - sublib/scripts/save-the-change
+    ~/bin/scripts:
+        path: sublib/scripts
     ~/.vim: ~
     ~/Downloads: /tmp
     ~/tmp: /tmp
