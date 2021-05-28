@@ -98,7 +98,7 @@
               VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
 
 
-- create: ['~/bin']
+- create: ['~/bin', '~/.local']
 
 
 - clean: ['~/', '~/bin']
