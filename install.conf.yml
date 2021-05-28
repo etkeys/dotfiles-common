@@ -9,6 +9,9 @@
 
 
 - sudo:
+    - create: ['/nfs']
+
+
     - link:
         /usr/local/bin/pip:
             path: /usr/bin/pip3
