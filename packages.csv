@@ -7,7 +7,6 @@ apt,curl,any,,
 apt,dkms,any,,
 snap,htop,any,,
 apt,iotop,any,,
-apt,neofetch,any,,Show Linux System Information with Distribution Logo
 apt,rename,any,,
 apt,sysstat,any,,
 apt,tree,any,,
