@@ -27,16 +27,16 @@
               sublib/scripts/install-packages.py --tags "any"
 
 
-        - description: Disable CUPS
-          command: >
-              systemctl is-enabled cups &&
-              (
-                  systemctl disable --now cups &&
-                  echo "cups disabled" &&
-                  systemctl disable --now cups-browsed &&
-                  echo "cups-browsed disabled"
-              ) ||
-              echo "cups not enabled... skipping."
+        # - description: Disable CUPS
+        #   command: >
+        #       systemctl is-enabled cups &&
+        #       (
+        #           systemctl disable --now cups &&
+        #           echo "cups disabled" &&
+        #           systemctl disable --now cups-browsed &&
+        #           echo "cups-browsed disabled"
+        #       ) ||
+        #       echo "cups not enabled... skipping."
 
 
         - description: Disable SSSD
