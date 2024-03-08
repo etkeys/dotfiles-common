@@ -114,7 +114,6 @@
     ~/bin/scripts:
         path: sublib/scripts
     ~/.vim: ~
-    ~/Downloads: /tmp
     ~/tmp: /tmp
 
 
