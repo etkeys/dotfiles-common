@@ -101,27 +101,27 @@
               VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
 
 
-- create: ['~/bin', '~/.local']
+- create: ['~/.local', '~/.local/bin']
 
 
-- clean: ['~/', '~/bin']
+- clean: ['~/', '~/.local/bin']
 
 
 - link:
     ~/:
         path: home/.*
         glob: true
-    ~/bin/scripts:
+    ~/.local/bin/scripts:
         path: sublib/scripts
     ~/.vim: ~
     ~/tmp: /tmp
 
 
 - sudo:
-    - create: ['~/bin']
+    - create: ['~/.local/bin']
 
 
-    - clean: ['~/', '~/bin']
+    - clean: ['~/', '~/.local/bin']
 
 
     - link:
@@ -129,7 +129,7 @@
         ~/:
             path: home/.*
             glob: true
-        ~/bin/scripts:
+        ~/.local/bin/scripts:
             path: sublib/scripts
         ~/.vim:
             path: vim
