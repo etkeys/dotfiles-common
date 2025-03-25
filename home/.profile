@@ -21,6 +21,9 @@ fi
 if [ -f "$HOME/.profile.local" ]; then
     . "$HOME/.profile.local"
 fi
+if [ -f "$HOME/.profile.secrets" ]; then
+    . "$HOME/.profile.secrets"
+fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
