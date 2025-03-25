@@ -11,13 +11,12 @@
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export SSH_ENV="$HOME/.ssh/environment"
 
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin/scripts:$HOME/bin:$PATH"
-fi
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+    PATH="$PATH:$HOME/.local/bin"
 fi
-
+if [ -d "$HOME/.local/bin/scripts" ]; then
+    PATH="$PATH:$HOME/.local/bin/scripts"
+fi
 if [ -f "$HOME/.profile.local" ]; then
     . "$HOME/.profile.local"
 fi
