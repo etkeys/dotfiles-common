@@ -9,8 +9,6 @@
 
 
 - sudo:
-    - create: ['/nfs']
-
 
     - link:
         /usr/local/bin/pip:
