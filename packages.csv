@@ -1,6 +1,6 @@
 provider,package,tags,additional_options,comments
 apt,python3-pip,any,,At top to allow for pip provider sooner. will need to link to /usr/local/bin/pip
-apt,snap,any,,At top to allow for snap provider sooner.
+apt,snapd,any,,At top to allow for snap provider sooner.
 apt,apt-file,any,,
 apt,apt-transport-https,any,,
 apt,curl,any,,
