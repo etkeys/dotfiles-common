@@ -23,7 +23,6 @@
     alias please='sudo "$BASH" -c "$(history -p !!)"'
     alias py='python3'
     alias snapr='snap run'
-    alias sudo='sudo -E'
     alias sysd='systemctl'
     alias umount='umount -v'
 
