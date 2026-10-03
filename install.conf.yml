@@ -98,6 +98,9 @@
               visudo -c -f ${SOURCE} &&
               VISUAL="cp ${SOURCE}" visudo -f ${TARGET}
 
+        - description: Set VIM as default editor
+          command: update-alternatives --set editor /usr/bin/vim.basic
+
 
 - create: ['~/.local', '~/.local/bin']
 
