@@ -170,6 +170,10 @@ fi
 
 
 # some ease of use functions
+ducks() {
+    du -h --max-depth=1 "${1:-.}" | sort -hr
+}
+
 giti(){
     for arg in "$@"; do
         echo "$arg" >> .gitignore
